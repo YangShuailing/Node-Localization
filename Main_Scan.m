@@ -87,7 +87,7 @@ for runs = 1:RUNS
     [Xa,X_rank]=sort(X_new,1);   
 
    est_lp=LP_EDSNL(Anchor_Number,Node_Number,Scan_Time,Xanchor,X_rank,cita,mminbb,mmaxb);
-   size(est_lp);
+   size(est_lp)  
    t =0;
 % %   plot_fig_lp(Xnode,est_lp,Xanchor,Node_Number,Anchor_Number,Size_Grid);   
 %    rmse_lp_tmp(count) = sqrt( sum((est_lp(:)-Xnode(:)).^2) / Node_Number );    
@@ -157,48 +157,15 @@ for i =1:n
     angle(i)=k;
 end
 
-%      for i = 1 : Acoustic_Number         
-%             % point[x0,y0] %ษ๙ิด
-%             % lin ax+by+c=0  
-%             x0 = Acoustic_Loc(1,1);
-%             y0 = Acoustic_Loc(1,2);
-%           d = zeros(Total_Number,Scan_Time);
-%          
-%          angle = zeros(Scan_Time,Total_Number);
-%             dis = zeros(Total_Number,Scan_Time);
-%            
-         
-%                 for k =1 : Total_Number
-%                        count = 0; 
-%                        for j = -90:180/(Scan_Time-1):90
-%                          count = count +1;
-%                             a = -sin(j); 
-%                             b = cos(j);
-%                             c = (sin(j)*x0 - cos(j)*y0);
-%                             lin = [a b c];
-%         %                     cc= XX_rank(k, count)
-%                             point1(1,1) = Node_Location(X_rank(k, count),1);
-%                             point1(1,2) = Node_Location(X_rank(k, count),2);
-%                             point2(1,1) = Node_Location(X_rank(k, count),3);    
-%                             point2(1,2) = Node_Location(X_rank(k, count),4);     
-%                             temp = abs(fun_dis(point1,lin) - fun_dis(point2,lin));
-%                             dis(k,count) = temp;
-% 
-%                             end
-%                           [m n] = min(dis');
-%                           angel(k)=cita(n) 
-%                  end  
-%        t =0 ;
-%      end
-    
-     
-     
-   
- 
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% [a, b]=  LP_Angle(Acoustic_Loc,Anchor_Number,Node_Number,Scan_Time,XX_rank,mminbb,mmaxb,Node_Location,Xanchor);
+   for  i=1:Total_Number
+        %%(L/2,0)
+        Microphone_1_Location(i,1)=Microphone_Center_Location(i,1) + 0.5*Microphone_Distance*(cos(Microphone_Cita(i)*pi/180));
+        Microphone_1_Location(i,2)=Microphone_Center_Location(i,2) + 0.5*Microphone_Distance*(-sin(Microphone_Cita(i)*pi/180));  
+         %%(-L/2,0)
+        Microphone_2_Location(i,1)=Microphone_Center_Location(i,1) - 0.5*Microphone_Distance*(cos(Microphone_Cita(i)*pi/180));
+        Microphone_2_Location(i,2)=Microphone_Center_Location(i,2) - 0.5*Microphone_Distance*(-sin(Microphone_Cita(i)*pi/180));        
+    end
 
-%  Angle
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % 
 % 
